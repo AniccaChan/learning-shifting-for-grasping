@@ -139,8 +139,8 @@ public:
       robot->moveCartesian(config.camera_frame, getBinCameraAffine(current_bin));
     }
 
-    // Take side images
-    if (config.take_side_images) {
+    // Take side images 
+    if (config.take_side_images) { //False in default
       Eigen::Affine3d center_of_rotation = getBinAffine(current_bin);
       double distance = 0.295;
       center_of_rotation.translation()(2) += 0.065;
@@ -168,7 +168,7 @@ public:
     }
 
     // Wait for force
-    if (config.wait_for_force) {
+    if (config.wait_for_force) { //False as default
       std::cout << "Waiting for force before next grasp..." << std::endl;
       auto position_hold_data = MotionData().withZForceCondition(10.0).withXYForceCondition(10.0); // [N]
       robot->positionHold(120.0, position_hold_data); // [s]
@@ -180,13 +180,13 @@ public:
     }
 
     SelectionMethod current_method;
-    if (config.mode == Mode::Measure) {
+    if (config.mode == Mode::Measure) { //Measure in default
       current_method = epoch.getSelectionMethod();
     } else {
       current_method = epoch.getSelectionMethodPerform(count_failed_grasps_since_last_success);
     }
 
-    if (config.mode == Mode::Evaluate) {
+    if (config.mode == Mode::Evaluate) { 
       std::this_thread::sleep_for(std::chrono::duration<double, std::milli>(1000)); // [ms]
     }
 
@@ -324,7 +324,7 @@ public:
       grasp_io->saveAttempt(grasp_result.id, new_grasp);
     }
 
-    if (config.set_zero_reward) new_grasp.found = -1;
+    if (config.set_zero_reward) new_grasp.found = -1;//false in default 
     grasp_result.grasp = new_grasp;
 
     // Check if bin is empty

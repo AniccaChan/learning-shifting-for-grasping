@@ -52,7 +52,7 @@ use_cpp_inference: true
 change_bins: true
 change_bin_at_max_probability: 0.0 # 5
 wait_for_force: false # Doesn't work currently
-push_objects: true
+ bjects: true
 random_actions_without_inference: true
 set_zero_reward: false
 home_gripper: true
@@ -102,7 +102,7 @@ move_down_distance_for_release: 0.080 # [m]
 measurement_gripper_force: 20.0 # [N], 15
 performance_gripper_force: 40.0 # [N]
 # gripper_classes: [0.025, 0.04, 0.086] # [m]
-gripper_classes: [0.05, 0.07, 0.086] # [m]
+gripper_classes: [0.05, 0.07, 0.086] # [m] ??
 
 
 # Evaluation
